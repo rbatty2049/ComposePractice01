@@ -8,17 +8,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import androidx.compose.ui.window.rememberWindowState
 
 @Composable
 @Preview
 fun App() {
     var text by remember { mutableStateOf("Hello, World!") }
-
+    var calcSmp : CalcSmp
     MaterialTheme {
+        calcSmp = CalcSmp()
         Button(onClick = {
-            text = "Hello, Desktop!"
+            text = calcSmp.calcSmp(5).toString()
         }) {
             Text(text)
         }
@@ -26,7 +29,13 @@ fun App() {
 }
 
 fun main() = application {
-    Window(onCloseRequest = ::exitApplication) {
+    Window(onCloseRequest = ::exitApplication,
+            title = "TITLE?",
+            state  = rememberWindowState(width = 300.dp, height = 300.dp)
+    ) {
+
+
+
         App()
     }
 }
